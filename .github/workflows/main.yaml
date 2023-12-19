@@ -17,6 +17,7 @@ jobs:
         docker build -t my_image:tag .
         
     - name: Create Docker Volume
+      run: |
         docker volume create my_volume
     
     - name: Run Docker container
