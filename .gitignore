@@ -1,0 +1,4 @@
+__pycache__
+.pytest_cache
+production_api/
+runtime.txt
