@@ -63,8 +63,6 @@ def predict_datapoint():
 
     request_data = request.get_json(force=True) 
 
-    print(request_data)
-
     manufacture = request_data.get('manufacture')
     
     if request.method == 'POST':
