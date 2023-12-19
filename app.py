@@ -66,9 +66,7 @@ def predict_datapoint():
     print(request_data)
 
     manufacture = request_data.get('manufacture')
-
-    print(manufacture)
-
+    
     if request.method == 'POST':
 
         if manufacture=="suzuki":
