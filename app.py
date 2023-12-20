@@ -63,11 +63,7 @@ def predict_datapoint():
 
     request_data = request.get_json(force=True) 
 
-    print(request_data)
-
     manufacture = request_data.get('manufacture')
-
-    print(manufacture)
 
     if request.method == 'POST':
 
@@ -95,8 +91,7 @@ def predict_datapoint():
             predict_pipeline=PredictPipeline(suzuki_model_path)
             
             results=predict_pipeline.predict(pred_df)
-            print(results)
-
+            
             saveData={
                 "Timestamps":ct,
                 "Manufacture": "suzuki",
@@ -123,7 +118,6 @@ def predict_datapoint():
             jasonData=getMileage(toyota_json)
 
             milage=jasonData[yom]
-            print(milage)
         
             data=CustomDataAutoFinance(
                 yom=request_data.get('yom'),
@@ -140,8 +134,7 @@ def predict_datapoint():
             predict_pipeline=PredictPipeline(toyota_model_path)
             
             results=predict_pipeline.predict(pred_df)
-            print(results)
-
+            
             saveData={
                 "Timestamps":ct,
                 "Manufacture": "toyota",
@@ -168,8 +161,7 @@ def predict_datapoint():
             jasonData=getMileage(nissan_json)
 
             milage=jasonData[yom]
-            print(milage)
-        
+            
             data=CustomDataAutoFinance(
                 yom=request_data.get('yom'),
                 model=request_data.get('model'),
@@ -185,8 +177,7 @@ def predict_datapoint():
             predict_pipeline=PredictPipeline(nissan_model_path)
             
             results=predict_pipeline.predict(pred_df)
-            print(results)
-
+            
             saveData={
                 "Timestamps":ct,
                 "Manufacture": "nissan",
@@ -213,8 +204,7 @@ def predict_datapoint():
             jasonData=getMileage(honda_json)
 
             milage=jasonData[yom]
-            print(milage)
-        
+            
             data=CustomDataAutoFinance(
                 yom=request_data.get('yom'),
                 model=request_data.get('model'),
@@ -226,12 +216,10 @@ def predict_datapoint():
             )
         
             pred_df=data.get_data_as_data_frame()
-            print(pred_df)
             
             predict_pipeline=PredictPipeline(honda_model_path)
             
             results=predict_pipeline.predict(pred_df)
-            print(results)
             
             saveData={
                 "Timestamps":ct,
@@ -261,10 +249,17 @@ def predict_datapoint():
             })
             response.status_code = 200
             return response
-                    
+
+    else :
+        app.logger.info("allowed only post request")
+        response = jsonify({
+            "message": "allowed only post request",
+        })
+        response.status_code = 400
+        return response
             
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port,debug=True)    
+    app.run(host='0.0.0.0', port=port)    
 
