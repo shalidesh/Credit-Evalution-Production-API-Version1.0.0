@@ -27,6 +27,12 @@ jobs:
           docker volume create my_volume
         fi
 
+    - name: Check if Docker image exists and remove it
+      run: |
+        if [ $(docker images -q my_image:tag) ]; then
+          docker rmi my_image:tag
+        fi
+
     - name: Build Docker image
       run: |
         docker build -t my_image:tag .
