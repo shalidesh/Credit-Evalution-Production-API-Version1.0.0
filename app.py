@@ -119,8 +119,7 @@ def predict_datapoint():
             jasonData=getMileage(toyota_json)
 
             milage=jasonData[yom]
-            print(milage)
-        
+            
             data=CustomDataAutoFinance(
                 yom=request_data.get('yom'),
                 model=request_data.get('model'),
