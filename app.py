@@ -64,7 +64,7 @@ def predict_datapoint():
     request_data = request.get_json(force=True) 
 
     manufacture = request_data.get('manufacture')
-
+    
     if request.method == 'POST':
 
         if manufacture=="suzuki":
@@ -118,7 +118,7 @@ def predict_datapoint():
             jasonData=getMileage(toyota_json)
 
             milage=jasonData[yom]
-        
+
             data=CustomDataAutoFinance(
                 yom=request_data.get('yom'),
                 model=request_data.get('model'),

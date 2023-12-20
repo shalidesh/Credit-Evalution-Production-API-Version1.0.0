@@ -40,3 +40,15 @@ jobs:
     - name: Run Docker container
       run: |
         docker run --name flask_app_container -d -p 5000:5000 -v my_volume:/app/predctionLogs my_image:tag
+       
+    - name: Build Docker image
+      run: |
+        docker build -t my_image:tag .
+        
+    - name: Create Docker Volume
+      run: |
+        docker volume create my_volume
+    
+    - name: Run Docker container
+      run: |
+        docker run -d -p 5000:5000 -v my_volume:/app/predctionLogs my_image:tag 
