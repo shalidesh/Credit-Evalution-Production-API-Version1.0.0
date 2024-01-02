@@ -13,25 +13,32 @@ class PredictPipeline:
 
     def predict(self,features):
         try:
+           
             model_path=os.path.join(self.model_location,"model.pkl")
-            preprocessor_path=os.path.join(self.model_location,"preprocessor.pkl")
+            # preprocessor_path=os.path.join(self.model_location,"preprocessor.pkl")
             print("model before loading")
             model=load_object(file_path=model_path)
-            print("model after loading")
-            print("preproceesor before loading")
-            preprocessor=load_object(file_path=preprocessor_path)
-            print("preproceesor after loading")
-            data_scaled=preprocessor.transform(features)
-            preds=model.predict(data_scaled)
-            print(preds)
-            return preds
+            print("model after loading.................")
+
+            print(f'load model :{model_path}')
+
+            print(features)
+
+            prediction = model.predict(features)
+            # print("preproceesor before loading")
+            # preprocessor=load_object(file_path=preprocessor_path)
+            # print("preproceesor after loading")
+            # data_scaled=preprocessor.transform(features)
+            # preds=model.predict(data_scaled)
+            print(prediction)
+            return prediction
         
         except FileNotFoundError:
             logging.error("Model or preprocessor file not found.")
-            return None  # Or some default prediction or error response
+            return [0]  # Or some default prediction or error response
         except Exception as e:
             logging.error(f"An error occurred during prediction: {str(e)}")
-            return None  # Or some default prediction or error response
+            return [0]  # Or some default prediction or error response
 
 
 class CustomDataAutoFinance:
@@ -69,9 +76,9 @@ class CustomDataAutoFinance:
                 # "Sub_Model":[self.sub_model],
                 "Age": [self.age],
                 "Mileage": [int(self.mileage)],
-                "Engine_Capacity": [self.engine_capacity],
+                "Engine Capacity": [self.engine_capacity],
                 "Model": [self.model],
-                "Fuel_Type": [self.fuel],
+                "Fuel Type": [self.fuel],
                 "Transmission": [self.transmission]        
             }
 
