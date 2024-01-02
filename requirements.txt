@@ -5,3 +5,4 @@ requests==2.31.0
 pytest==7.4.3
 xgboost==2.0.2
 gunicorn
+pymongo==4.6.1
