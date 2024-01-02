@@ -366,7 +366,8 @@ def upload():
         collection.delete_many({})
 
     # Load your CSV file
-    df = pd.read_csv('predctionLogs\predctions.csv')
+    datasetPath=os.path.join('predctionLogs',"predctions.csv")
+    df = pd.read_csv(datasetPath)
 
     # Convert each record to dict and insert into the collection
     collection.insert_many(df.to_dict('records'))
